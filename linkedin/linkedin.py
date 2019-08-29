@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import hashlib
 import json
 from collections import namedtuple
 from urllib.parse import quote

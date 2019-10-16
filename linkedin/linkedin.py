@@ -107,3 +107,13 @@ class LinkedIn:
         url = f"{self.BASE_URL}/v2/ugcPosts"
         response = self.make_request("POST", url, data=json.dumps(data))
         return response.json()
+
+
+    def get_profile(self):
+        """
+        Retrieve the current member's profile based on the access token.
+        This API requires one of these permissions: r_liteprofile, r_basicprofile
+        """
+        url = f"{self.BASE_URL}/v2/me"
+        response = self.make_request("GET", url)
+        return response.json()

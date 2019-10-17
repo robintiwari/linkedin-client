@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 import hashlib
 import json
+import random
 from collections import namedtuple
 from urllib.parse import quote
 
 import requests
-from requests_oauthlib import OAuth2
 
 AccessToken = namedtuple("AccessToken", ["access_token", "expires_in"])
 
@@ -57,7 +57,7 @@ class LinkedinOAuth2:
             "client_secret": self.secret,
         }
         response = requests.post(self.ACCESS_TOKEN_URL, data=data, timeout=timeout)
-        raise_for_error(response)
+        response.raise_for_status()
         response = response.json()
         self.token = AccessToken(response["access_token"], response["expires_in"])
         return self.token

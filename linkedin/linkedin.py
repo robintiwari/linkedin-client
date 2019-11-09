@@ -90,9 +90,12 @@ class LinkedIn:
 
         return requests.request(method.upper(), url, **kw)
 
-    def submit_ugc_post(
+    def create_ugc_post(
         self, author=None, text=None, lifecycle_state="PUBLISHED", visibility_code="PUBLIC"
     ):
+        """
+        Create UGC Post
+        """
         data = {
             "author": author,
             "lifecycleState": lifecycle_state,

@@ -108,12 +108,29 @@ class LinkedIn:
         response = self.make_request("POST", url, data=json.dumps(data))
         return response.json()
 
-
     def get_profile(self):
         """
         Retrieve the current member's profile based on the access token.
         This API requires one of these permissions: r_liteprofile, r_basicprofile
         """
         url = f"{self.BASE_URL}/v2/me"
+        response = self.make_request("GET", url)
+        return response.json()
+    
+    def get_organization_acls(self):
+        """
+        Find a Member's Organization Access Control Information.
+        This call requires member to be an "ADMINISTRATOR".
+        """
+        url = f"{self.BASE_URL}/v2/organizationalEntityAcls"
+        params = {"q": "roleAssignee", "state": "APPROVED",}
+        response = self.make_request("GET", url, params=params)
+        return response.json()
+    
+    def get_organization(self, organization_id):
+        """
+        Retrieve an Administered Organization
+        """
+        url = f"{self.BASE_URL}/v2/organizations/{organization_id}"
         response = self.make_request("GET", url)
         return response.json()
